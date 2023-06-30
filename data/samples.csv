@@ -1,0 +1,19 @@
+VA,source,target,domain,method
+Angela Merkel is the Ringo Starr of politicians,Angela Merkel,Ringo Starr,politics,word2vec_translate
+Alan Turing was the Chester Bennington of computer scientists,Alan Turing,Chester Bennington,computer science,word2vec_translate
+Freddie Mercury was the Usain Bolt of singer-songwriters,Freddie Mercury,Usain Bolt,music,word2vec_translate
+Angela Merkel is the PSY of politicians,Angela Merkel,PSY,politics,word2vec
+Alan Turing was the Lucille Ball of computer scientists,Alan Turing,Lucille Ball,computer science,word2vec
+Freddie Mercury was the Mark Twain of singer-songwriters,Freddie Mercury,Mark Twain,music,word2vec
+Angela Merkel is the Vincent van Gogh of politicians,Angela Merkel,Vincent van Gogh,politics,glove_translate
+Alan Turing was the Wilhelm von Humboldt of computer scientists,Alan Turing,Wilhelm von Humboldt,computer science,glove_translate
+Freddie Mercury was the Fahd bin Abdoel Aziz al-Saoed of singer-songwriters,Freddie Mercury,Fahd bin Abdoel Aziz al-Saoed,music,glove_translate
+Angela Merkel is the Friedrich von Schlegel of politicians,Angela Merkel,Friedrich von Schlegel,politics,glove 
+Alan Turing was the Alexandre Dumas fils of computer scientists,Alan Turing,Alexandre Dumas,computer science,glove 
+Freddie Mercury was the Daphne du Maurier of singer-songwriters,Freddie Mercury,Daphne du Maurier,music,glove 
+Angela Merkel is the Warren Buffett of politicians,Angela Merkel,Warren Buffett,politics,transE_translate
+Alan Turing was the Dua Lipa of computer scientists,Alan Turing,Dua Lipa,computer science,transE_translate
+Freddie Mercury was the Justin Trudeau of singer-songwriters,Freddie Mercury,Justin Trudeau,music,transE_translate
+Angela Merkel is the Marlene Dietrich of politicians,Angela Merkel,Marlene Dietrich,politics,transE 
+Alan Turing was the George Orwell of computer scientists,Alan Turing,George Orwell,computer science,transE 
+Freddie Mercury was the Heidi Klum of singer-songwriters,Freddie Mercury,Heidi Klum,music,transE 
