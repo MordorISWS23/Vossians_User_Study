@@ -5,8 +5,6 @@ from formatting import format_sidebar_intro
 
 
 def get_nickname():
-    if "nickname" not in st.session_state:
-        st.session_state["nickname"] = None
     placeholder = st.empty()
     st.markdown("<p style='font-size: 20px;'>To optimize the processing of the data that were collected"
                 " in the study, we would like you to enter a nickname:</p>", unsafe_allow_html=True)
@@ -43,7 +41,7 @@ def display_intro():
                 "data/hotpotAI_thunberg_parks_climate_change.png",
                 width=200
             )
-            st.markdown('<p style="font-size: 12px;">Picture created with hotpotAi using: "Greta Thunberg '
+            st.markdown('<p style="font-size: 12px;">Picture created with hotpotAi inspired by: "Greta Thunberg '
                         'is the Rosa Parks of climate change."</p>', unsafe_allow_html=True)
 
     # Add some vertical space
