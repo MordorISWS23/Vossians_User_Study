@@ -14,11 +14,18 @@ def get_nickname():
 
     submission = st.button("Submit")
     if submission:
-        placeholder.empty()
         name = st.session_state['nickname']
-        name = name[0].upper() + name[1:]
-        st.info(f"Thank you, {name}!")
-    add_vertical_space(3)
+        if len(name) > 1:
+            name = name[0].upper() + name[1:]
+            placeholder.empty()
+            st.info(f"Thank you, {name}!")
+        elif len(name) < 1:
+            st.info(f"Please enter a nickname with at least one letter.")
+        else:
+            name = name[0].upper()
+            placeholder.empty()
+            st.info(f"Thank you, {name}!")
+        add_vertical_space(3)
 
 
 def display_intro():
@@ -99,7 +106,7 @@ def main():
     start = st.button("Start")
     # Check session state to switch page
     if start:
-        if st.session_state["nickname"] is None:
+        if len(st.session_state["nickname"]) < 2:
             st.info("Please enter a nickname before continuing.")
         else:
             switch_page("vossian_antonomasias")
