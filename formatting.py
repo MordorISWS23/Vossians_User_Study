@@ -4,6 +4,16 @@ from streamlit_extras.add_vertical_space import add_vertical_space
 from os.path import exists
 
 
+def display_num_participants():
+    # manually write content into sidebar
+    if exists("data/ratings_fit.csv"):
+        participants = pd.read_csv("data/ratings_fit.csv")
+        num_users = len(participants)
+    else:
+        num_users = 0
+    return num_users
+
+
 def format_sidebar_intro():
     no_sidebar_style = """
             <style>
@@ -19,13 +29,7 @@ def format_sidebar_intro():
             </style>
         """
     st.markdown(no_button_style, unsafe_allow_html=True)
-
-    # manually write content into sidebar
-    if exists("data/participants.csv"):
-        participants = pd.read_csv("data/participants.csv")
-        num_users = len(participants)
-    else:
-        num_users = 0
+    num_users = display_num_participants()
     with st.sidebar:
         add_vertical_space(8)
         pages = """
@@ -60,12 +64,7 @@ def format_sidebar_goodbye():
         """
     st.markdown(no_button_style, unsafe_allow_html=True)
 
-    # manually write content into sidebar
-    if exists("data/participants.csv"):
-        participants = pd.read_csv("data/participants.csv")
-        num_users = len(participants)
-    else:
-        num_users = 0
+    num_users = display_num_participants()
     with st.sidebar:
         add_vertical_space(8)
         pages = """
@@ -110,12 +109,7 @@ def format_sidebar_radio_va():
         unsafe_allow_html=True
     )
 
-    # manually write content into sidebar
-    if exists("data/participants.csv"):
-        participants = pd.read_csv("data/participants.csv")
-        num_users = len(participants)
-    else:
-        num_users = 0
+    num_users = display_num_participants()
     with st.sidebar:
         add_vertical_space(8)
         pages = """
@@ -160,12 +154,7 @@ def format_sidebar_radio_know():
         unsafe_allow_html=True
     )
 
-    # manually write content into sidebar
-    if exists("data/participants.csv"):
-        participants = pd.read_csv("data/participants.csv")
-        num_users = len(participants)
-    else:
-        num_users = 0
+    num_users = display_num_participants()
     with st.sidebar:
         add_vertical_space(8)
         pages = """
@@ -210,12 +199,7 @@ def format_sidebar_radio_question():
         unsafe_allow_html=True
     )
 
-    # manually write content into sidebar
-    if exists("data/participants.csv"):
-        participants = pd.read_csv("data/participants.csv")
-        num_users = len(participants)
-    else:
-        num_users = 0
+    num_users = display_num_participants()
     with st.sidebar:
         add_vertical_space(8)
         pages = """
