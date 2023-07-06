@@ -48,7 +48,6 @@ def format_sidebar_intro():
 
 
 def format_sidebar_goodbye():
-    st.title("Goodbye")
     no_sidebar_style = """
             <style>
                 div[data-testid="stSidebarNav"] {display: none;}
