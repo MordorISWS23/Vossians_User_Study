@@ -4,21 +4,24 @@ from streamlit_extras.add_vertical_space import add_vertical_space
 from formatting import format_sidebar_intro
 
 #TODO: delete text from textinput
+# TODO: add text to picture and info on generation
 
-def clear_nickname():
-    st.session_state["text"] = ""
 
 def get_nickname():
-    if "text" not in st.session_state:
-        st.session_state.text = ""
+    placeholder = st.empty()
+    if "nickname" not in st.session_state:
+        st.session_state.nickname = ""
     st.markdown("<p style='font-size: 20px;'>To optimize the processing of the data that were collected"
                 " in the study, we would like you to enter a nickname:</p>", unsafe_allow_html=True)
-    nickname = st.text_input(label="la",  label_visibility="hidden", max_chars=20, key="text")
-    st.session_state["nickname"] = nickname
+    text = placeholder.text_input(label="la",  label_visibility="hidden", max_chars=20)
+    st.session_state["nickname"] = text
     add_vertical_space(1)
     submission = st.button("Submit")
     if submission:
-        st.info(f"Thank you, {st.session_state['nickname']}")
+        placeholder.empty()
+        name = st.session_state['nickname']
+        name = name[0].upper() + name[1:]
+        st.info(f"Thank you, {name}!")
     add_vertical_space(3)
 
 
