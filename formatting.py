@@ -35,8 +35,6 @@ def format_sidebar_intro():
 
             ### Who do you know ❓
 
-            ### Questionnaire
-
             ### Goodbye
             """
         st.markdown(pages, unsafe_allow_html=True)
@@ -76,8 +74,6 @@ def format_sidebar_goodbye():
             ### Vossian Antonomasias
 
             ### Who do you know ❓
-
-            ### Questionnaire
 
             ### <span style="color: #F4AA08">Goodbye</span>
             """
@@ -129,8 +125,6 @@ def format_sidebar_radio_va():
 
                         ### Who do you know ❓
 
-                        ### Questionnaire
-
                         ### Goodbye
                         """
         st.markdown(pages, unsafe_allow_html=True)
@@ -181,8 +175,6 @@ def format_sidebar_radio_know():
 
                         ### <span style="color: #F4AA08">Who do you know ❓</span>
 
-                        ### Questionnaire
-
                         ### Goodbye
                         """
         st.markdown(pages, unsafe_allow_html=True)
@@ -232,8 +224,6 @@ def format_sidebar_radio_question():
                         ### Vossian Antonomasias
 
                         ### Who do you know ❓
-
-                        ### <span style="color: #F4AA08">Questionnaire</span>
 
                         ### Goodbye
                         """
