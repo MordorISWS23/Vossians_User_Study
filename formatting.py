@@ -6,7 +6,7 @@ from os.path import exists
 
 def display_num_participants():
     # manually write content into sidebar
-    if exists("data/ratings_fit.csv"):
+    if exists("data/knowledge_ents.csv"):
         participants = pd.read_csv("data/knowledge_ents.csv")
         num_users = len(participants)
     else:
