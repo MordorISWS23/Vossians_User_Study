@@ -39,9 +39,15 @@ def display_intro():
                     " humans. </i></p>"
             st.markdown(intro, unsafe_allow_html=True)
             add_vertical_space(2)
-            example = '<p style="font-size: 20px;">An example of a Vossian Antonomasia: <i>Bill Gates is the ' \
-                      'Henry Ford of the computer age.</i></p>'
-            st.markdown(example, unsafe_allow_html=True)
+
+            with st.expander("What are Vossian Antonomasias?"):
+                st.markdown('<p style="font-size: 16px;">Vossian antonomasias refer to someone by a special '
+                            'characteristic instead of their name.  \
+                             <br>   For example, calling Bill Gates "the Henry Ford of the computer age" '
+                            'highlights his influence as entrepeneur and his effect on the development of technology. \
+                             <br> It is a way to describe someone by an important quality they possess. </p>',
+                            unsafe_allow_html=True)
+            add_vertical_space(2)
         with right_col:
             # Insert Image
             st.image(
