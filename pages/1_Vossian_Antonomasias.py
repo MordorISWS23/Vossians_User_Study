@@ -22,8 +22,8 @@ class VossianAntonomasiasRater:
             st.session_state["data_VA_fit"] = {}
             st.session_state["data_VA_understand"] = {}
         st.title("Rate Vossian Antonomasias")
-        st.markdown('<p style="font-size: 20px;">Please rate the following sentences with <i>1</i> being the best and '
-                    '<i>5</i> being the worst evaluation.</p>', unsafe_allow_html=True)
+        st.markdown('<p style="font-size: 20px;">Please rate the following sentences with <b>1</b> being the best and '
+                    '<b>5</b> being the worst evaluation.</p>', unsafe_allow_html=True)
 
         df_samples = pd.read_csv("data/samples.csv")
         self.sentences = list(df_samples["VA"])
