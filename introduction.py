@@ -7,7 +7,7 @@ from formatting import format_sidebar_intro
 def get_nickname():
     with st.form("formid"):
         placeholder = st.empty()
-        text = placeholder.text_input(label="la",  label_visibility="hidden", max_chars=20, help=None)
+        text = placeholder.text_input(label="la", label_visibility="hidden", max_chars=20, help=None)
         st.session_state["nickname"] = text
         add_vertical_space(1)
         submission = st.form_submit_button("Submit")
@@ -27,32 +27,41 @@ def get_nickname():
 
 
 def display_intro():
+    st.markdown(
+        f"""
+        <style>
+        [data-testid="stSidebar"] > div:not(:first-child) {{
+            margin-left: 50px;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     st.title("*Vossian Antonomasias*")
+    add_vertical_space(2)
     with st.container():
-        left_col, right_col = st.columns([1, 2])
-        with left_col:
-            st.subheader("Welcome to the Study 'Vossian Antonomasias'!")
-            intro = "<p style='font-size: 25px;'>This is a research study that shall test whether machines can be as " \
-                    "creative as" \
-                    " humans. </i></p>"
-            st.markdown(intro, unsafe_allow_html=True)
-            add_vertical_space(2)
-            with st.expander("What are Vossian Antonomasias?"):
-                st.markdown('<p style="font-size: 16px;">Vossian antonomasias refer to someone by a special '
-                            'characteristic instead of their name.  \
-                             <br>   For example, calling Bill Gates "the Henry Ford of the computer age" '
-                            'highlights his influence as entrepeneur and his effect on the development of technology. \
-                             <br> It is a way to describe someone by an important quality they possess. </p>',
-                            unsafe_allow_html=True)
-            add_vertical_space(2)
-        with right_col:
-            # Insert Image
-            st.image(
-                "data/hotpotAI_thunberg_parks_climate_change.png",
-                width=200
-            )
-            st.markdown('<p style="font-size: 12px;">Picture created with hotpotAi inspired by: "Greta Thunberg '
-                        'is the Rosa Parks of climate change."</p>', unsafe_allow_html=True)
+        left_col, right_col = st.columns([1, 2], gap="large")
+
+        left_col.subheader("Welcome to the Study 'Vossian Antonomasias'!")
+        intro = "<p style='font-size: 25px;'>This is a research study that shall test whether machines can be as " \
+                "<i>creative</i> as humans.</p>"
+        left_col.markdown(intro, unsafe_allow_html=True)
+        add_vertical_space(3)
+        expander = st.expander("What are Vossian Antonomasias?")
+        expander.markdown('<p style="font-size: 16px;">Vossian antonomasias refer to someone by a special '
+                          'characteristic instead of their name.  \
+                         <br>   For example, calling Bill Gates "the Henry Ford of the computer age" '
+                          'highlights his influence as entrepeneur and his effect on the development of technology. \
+                         <br> It is a way to describe someone by an important quality they possess. </p>',
+                          unsafe_allow_html=True)
+        add_vertical_space(2)
+        left_col.empty()
+        # Insert Image
+        right_col.image(
+            "data/hotpotAI_thunberg_parks_climate_change.png", width=300
+        )
+        right_col.markdown('<p style="font-size: 15px;">Picture created with hotpotAi inspired by: "Greta Thunberg '
+                           'is the Rosa Parks of climate change."</p>', unsafe_allow_html=True)
 
     # Add some vertical space
     add_vertical_space(3)
