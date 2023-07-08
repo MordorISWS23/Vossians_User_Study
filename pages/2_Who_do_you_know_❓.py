@@ -37,7 +37,7 @@ class KnowledgeInquirer:
             st.markdown(f"**{ent}**")
             knowledge = st.radio(label="label", label_visibility="hidden",
                                  options=("",
-                                          "I know exactly who that person is.",
+                                          "I know who that person is.",
                                           "I have heard of the name but I cannot relate it to anything.",
                                           "I have never heard of that name before."), key=f"{ent}_{key_know}",
                                  horizontal=False)
