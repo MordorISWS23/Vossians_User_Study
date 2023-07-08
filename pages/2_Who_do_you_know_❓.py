@@ -48,7 +48,7 @@ class KnowledgeInquirer:
         if know_submit and not self.submitted:
             self.submitted = True
             self.knowledge_to_df()
-            switch_page("3_Goodbye")
+            switch_page("Goodbye")
 
     def knowledge_to_df(self):
         data_know = st.session_state.get("data_know")
