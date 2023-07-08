@@ -5,41 +5,38 @@ from formatting import format_sidebar_intro
 
 
 def get_nickname():
-    placeholder = st.empty()
-    st.markdown("<p style='font-size: 20px;'>To optimize the processing of the data that were collected"
-                " in the study, we would like you to enter a nickname:</p>", unsafe_allow_html=True)
-    text = placeholder.text_input(label="la",  label_visibility="hidden", max_chars=20)
-    st.session_state["nickname"] = text
-    add_vertical_space(1)
-
-    submission = st.button("Submit")
-    if submission:
-        name = st.session_state['nickname']
-        if len(name) > 1:
-            name = name[0].upper() + name[1:]
-            placeholder.empty()
-            st.info(f"Thank you, {name}!")
-        elif len(name) < 1:
-            st.info(f"Please enter a nickname with at least one letter.")
-        else:
-            name = name[0].upper()
-            placeholder.empty()
-            st.info(f"Thank you, {name}!")
-        add_vertical_space(3)
+    with st.form("formid"):
+        placeholder = st.empty()
+        text = placeholder.text_input(label="la",  label_visibility="hidden", max_chars=20, help=None)
+        st.session_state["nickname"] = text
+        add_vertical_space(1)
+        submission = st.form_submit_button("Submit")
+        if submission:
+            name = st.session_state['nickname']
+            if len(name) > 1:
+                name = name[0].upper() + name[1:]
+                placeholder.empty()
+                st.info(f"Thank you, {name}.")
+            elif len(name) < 1:
+                st.info(f"Please enter a nickname with at least one letter.")
+            else:
+                name = name[0].upper()
+                placeholder.empty()
+                st.info(f"Thank you, {name}.")
+            add_vertical_space(3)
 
 
 def display_intro():
+    st.title("*Vossian Antonomasias*")
     with st.container():
         left_col, right_col = st.columns([1, 2])
         with left_col:
-            st.title("*Vossian Antonomasias*")
             st.subheader("Welcome to the Study 'Vossian Antonomasias'!")
             intro = "<p style='font-size: 25px;'>This is a research study that shall test whether machines can be as " \
                     "creative as" \
                     " humans. </i></p>"
             st.markdown(intro, unsafe_allow_html=True)
             add_vertical_space(2)
-
             with st.expander("What are Vossian Antonomasias?"):
                 st.markdown('<p style="font-size: 16px;">Vossian antonomasias refer to someone by a special '
                             'characteristic instead of their name.  \
@@ -69,7 +66,7 @@ def display_about_study():
 
         st.markdown("<p style='font-size: 20px;'>1. You will be a given X sentences to rate that "
                     "were generated with different methods. We want to find out,"
-                    " which method generates the best Vossian Antonomasias!</p>",
+                    " which method generates the best Vossian Antonomasias.</p>",
                     unsafe_allow_html=True)
         st.markdown("<p style='font-size: 20px;'>2. After rating the sentences,"
                     " we will ask you some questions about the persons that were in the sentences you rated.</p>",
@@ -77,9 +74,11 @@ def display_about_study():
         add_vertical_space(1)
         how = "<p style='font-size: 25px;'>Before the study starts:</p>"
         st.markdown(how, unsafe_allow_html=True)
-
+        # info for nickname
+        st.markdown("<p style='font-size: 20px;'>To optimize the processing of the data that were collected"
+                    " in the study, we would like you to enter a nickname:</p>", unsafe_allow_html=True)
         get_nickname()
-
+        add_vertical_space(2)
         st.markdown('<p style="font-size: 20px; font-weight: bold;">About this study:</p>', unsafe_allow_html=True)
         st.markdown('<p style="font-size: 20px;">The entire study should take about 10 minutes. \
                      All your answers will be collected anonymously. \
@@ -92,7 +91,7 @@ def display_about_study():
                     'because of the anonymization. <br> If you have'
                     ' any questions about this study, please contact Johanna Rockstroh'
                     ' (rockstro@uni-bremen.de). <br> <br> If you want to proceed with the study, '
-                    'please click "Start"!</p>', unsafe_allow_html=True)
+                    'please click "Start".</p>', unsafe_allow_html=True)
 
         st.markdown("<style>div.stButton>button:first-child {height: 2em; width: 4em; font-size:30px}</style>",
 
