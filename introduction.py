@@ -37,6 +37,7 @@ def display_intro():
         """,
         unsafe_allow_html=True
     )
+    st.markdown(st.markdown('<div class="footer">Your footer content with <a href="https://example.com">link</a></div>', unsafe_allow_html=True))
     st.title("*Vossian Antonomasias*")
     add_vertical_space(2)
     with st.container():
@@ -107,6 +108,31 @@ def display_about_study():
                     unsafe_allow_html=True)
 
 
+def write_footer():
+    st.markdown(
+        """
+        <style>
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #f5f5f5;
+                color: #666;
+                text-align: right;
+                padding: 10px;
+                font-size: 16px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<div class="footer"><a href="https://vossians.informatik.uni-bremen.de/Goodbye">Imprint</a> | <a href="https://www.uni-bremen.de/en/data-privacy">Privacy Policy</a></div>',
+        unsafe_allow_html=True
+    )
+
+
 def main():
     st.set_page_config(
         page_title="Vossian Antonomasias",
@@ -118,6 +144,7 @@ def main():
     display_about_study()
     # Update status of start with button "start"
     start = st.button("Start")
+    write_footer()
     # Check session state to switch page
     if start:
         if len(st.session_state["nickname"]) < 2:
