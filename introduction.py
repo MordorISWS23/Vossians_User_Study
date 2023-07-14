@@ -37,7 +37,6 @@ def display_intro():
         """,
         unsafe_allow_html=True
     )
-    st.markdown(st.markdown('<div class="footer">Your footer content with <a href="https://example.com">link</a></div>', unsafe_allow_html=True))
     st.title("*Vossian Antonomasias*")
     add_vertical_space(2)
     with st.container():
