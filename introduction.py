@@ -5,6 +5,9 @@ from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.add_vertical_space import add_vertical_space
 from formatting import format_sidebar_intro
 
+from faker import Faker
+fake = Faker()
+Faker.seed(42)
 
 def sample(data):
     nickname = st.session_state["nickname"]
@@ -121,12 +124,9 @@ def display_about_study():
                     " we will ask you some questions about the persons that were in the sentences you rated.</p>",
                     unsafe_allow_html=True)
         add_vertical_space(1)
-        how = "<p style='font-size: 25px;'>Before the study starts:</p>"
-        st.markdown(how, unsafe_allow_html=True)
-        # info for nickname
-        st.markdown("<p style='font-size: 20px;'>To optimize the processing of the data that were collected"
-                    " in the study, we would like you to enter a nickname:</p>", unsafe_allow_html=True)
-        get_nickname()
+        
+        st.session_state["nickname"] = fake.unique.ean(length=13)
+
         add_vertical_space(2)
         st.markdown('<p style="font-size: 20px; font-weight: bold;">About this study:</p>', unsafe_allow_html=True)
         st.markdown('<p style="font-size: 20px;">The entire study should take about 10 minutes. \
