@@ -19,6 +19,7 @@ def sample(data):
     reduced_other_df['Model'] = np.random.permutation(reduced_other_df['Model'].values)
     reduced_other_df = reduced_other_df.sort_values(by=['A'])
     reduced_other_df.reset_index(drop=True)
+    reduced_other_df.to_csv("data/current_samples_ents.csv")
     sentences = []
     alive_dead = {"Angela Merkel": "is",
                   "Nelson Mandela": "was",
