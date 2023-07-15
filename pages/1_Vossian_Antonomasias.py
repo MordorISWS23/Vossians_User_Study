@@ -27,50 +27,16 @@ class VossianAntonomasiasRater:
         st.title("Rate Vossian Antonomasias")
         st.markdown('<p style="font-size: 20px;">Please rate the following sentences with <b>1</b> being the best and '
                     '<b>5</b> being the worst evaluation.</p>', unsafe_allow_html=True)
-        # create final version of data sample, new one for every participant
-        self.sample()
-        print(self.final_sample)
-        alive_dead = {"Angela Merkel": "is",
-                      "Nelson Mandela": "was",
-                      "Bill Gates": "is",
-                      "Albert Einstein": "was",
-                      "Mark Twain": "was",
-                      "Ronald Reagan": "was"
-                      }
-        # generate sentences from entities and domain
-        self.sentences = []
-        for i, row in self.final_sample.iterrows():
-            A = str(row['A'])
-            B = str(row['B'])
-            C = str(row['C'])
-            sent = f"{A} {alive_dead[A]} the {B} of {C}"
-            model = str(row['Model'])
-            self.sentences.append((str(sent), model))
-        df = pd.DataFrame(self.sentences, columns=["Sentence", "Model"])
-        df.to_csv("data/current_sample.csv")
         self.handle_ratings()
-
-    def sample(self):
-        # read csv and start random process
-        df_samples = pd.read_csv(self.samples)
-        # randomly select combination of one A and one model for every unique value of model and A -> 42 sentences
-        random_rows = df_samples.groupby(['A', 'Model']).apply(lambda x: x.sample(n=1)).reset_index(drop=True)
-        # randomly select 3 A's so that every A has a unique method
-        sampled_values = random_rows["A"].drop_duplicates().sample(n=3, replace=False)
-        # reduce dataframe to randomly selected three A's -> 21 sentences
-        reduced_other_df = random_rows[random_rows['A'].isin(sampled_values)]
-        # shuffle dataframe based on column "model"
-        reduced_other_df['Model'] = np.random.permutation(reduced_other_df['Model'].values)
-        reduced_other_df = reduced_other_df.sort_values(by=['A'])
-        reduced_other_df.reset_index(drop=True)
-        self.final_sample = reduced_other_df
 
     def handle_ratings(self):
         df_current = pd.read_csv("data/current_sample.csv")
         key_fit = 0
         key_original = 0
         key_understand = 0
-        for index, sent in enumerate(df_current["Sentence"]):
+        for index, row in df_current.iterrows():
+            sent = row["Sentence"]
+            model = row["Model"]
             key_fit = f"{index}_{key_fit}"
             key_original = f"{index}_{key_original}"
             key_understand = f"{index}_{key_understand}"
@@ -79,15 +45,16 @@ class VossianAntonomasiasRater:
             rating_fit = st.radio(label="How well does this description fit?", options=(0, 1, 2, 3, 4, 5),
                                   key=f"{key_fit}_fit",
                                   horizontal=True)
-            rating_understand = st.radio(label="How understandable is this description?", options=(0, 1, 2, 3, 4, 5),
+            rating_understand = st.radio(label="How understandable is this description?",
+                                         options=(0, 1, 2, 3, 4, 5),
                                          key=f"{key_understand}_understand",
                                          horizontal=True)
             rating_original = st.radio(label="How original is this description?", options=(0, 1, 2, 3, 4, 5),
                                        key=f"{key_original}_original",
                                        horizontal=True)
-            st.session_state.data_VA_fit[sent] = rating_fit
-            st.session_state.data_VA_understand[sent] = rating_understand
-            st.session_state.data_VA_original[sent] = rating_original
+            st.session_state.data_VA_fit[sent, model] = rating_fit
+            st.session_state.data_VA_understand[sent, model] = rating_understand
+            st.session_state.data_VA_original[sent, model] = rating_original
         rating_submit = st.button("Submit", key=f"submit_all")
         if rating_submit and not self.submitted:
             self.submitted = True
