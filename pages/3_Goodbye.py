@@ -1,5 +1,5 @@
 import streamlit as st
-from formatting import format_sidebar_goodbye
+from formatting import format_sidebar_goodbye, write_footer
 from streamlit_extras.add_vertical_space import add_vertical_space
 
 
@@ -52,6 +52,7 @@ class ThankYouPage:
 
     def main(self):
         format_sidebar_goodbye()
+        write_footer()
         st.markdown(self.thank_you, unsafe_allow_html=True)
         st.markdown(self.text, unsafe_allow_html=True)
         st.markdown(self.text1, unsafe_allow_html=True)
