@@ -1,10 +1,46 @@
 import streamlit as st
+import numpy as np
+import pandas as pd
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.add_vertical_space import add_vertical_space
 from formatting import format_sidebar_intro
 
 
+def sample(data):
+    # read csv and start random process
+    df_samples = pd.read_csv(data)
+    # randomly select combination of one A and one model for every unique value of model and A -> 42 sentences
+    random_rows = df_samples.groupby(['A', 'Model']).apply(lambda x: x.sample(n=1)).reset_index(drop=True)
+    # randomly select 3 A's so that every A has a unique method
+    sampled_values = random_rows["A"].drop_duplicates().sample(n=3, replace=False)
+    # reduce dataframe to randomly selected three A's -> 21 sentences
+    reduced_other_df = random_rows[random_rows['A'].isin(sampled_values)]
+    # shuffle dataframe based on column "model"
+    reduced_other_df['Model'] = np.random.permutation(reduced_other_df['Model'].values)
+    reduced_other_df = reduced_other_df.sort_values(by=['A'])
+    reduced_other_df.reset_index(drop=True)
+    sentences = []
+    alive_dead = {"Angela Merkel": "is",
+                  "Nelson Mandela": "was",
+                  "Bill Gates": "is",
+                  "Albert Einstein": "was",
+                  "Mark Twain": "was",
+                  "Ronald Reagan": "was"
+                  }
+    for i, row in reduced_other_df.iterrows():
+        A = str(row['A'])
+        B = str(row['B'])
+        C = str(row['C'])
+        sent = f"{A} {alive_dead[A]} the {B} of {C}"
+        model = str(row['Model'])
+        sentences.append((str(sent), model))
+    df = pd.DataFrame(sentences, columns=["Sentence", "Model"])
+    df.to_csv("data/current_sample.csv")
+
+
 def get_nickname():
+    if "nickname" not in st.session_state:
+        st.session_state["nickname"] = ""
     with st.form("formid"):
         placeholder = st.empty()
         text = placeholder.text_input(label="la", label_visibility="hidden", max_chars=20, help=None)
@@ -149,6 +185,9 @@ def main():
         if len(st.session_state["nickname"]) < 2:
             st.info("Please enter a nickname before continuing.")
         else:
+            # create current sample
+            sample("data/gen_sents.csv")
+            # switch to page for ratings
             switch_page("vossian_antonomasias")
 
 
