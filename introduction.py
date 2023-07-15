@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.add_vertical_space import add_vertical_space
-from formatting import format_sidebar_intro
+from formatting import format_sidebar_intro, write_footer
 
 from faker import Faker
 fake = Faker()
@@ -131,7 +131,7 @@ def display_about_study():
         st.markdown('<p style="font-size: 20px; font-weight: bold;">About this study:</p>', unsafe_allow_html=True)
         st.markdown('<p style="font-size: 20px;">The entire study should take about 10 minutes. \
                      All your answers will be collected anonymously. \
-                     We do not collect personal information, like your name or IP address. \
+                     We do not collect personal information, like your name. \
                      You are free to quit the study at any time. The data that we collect is stored on a server of '
                     'the University of Bremen, in Germany. \
                  After the study finishes, the data from all participants will be analysed '
@@ -145,31 +145,6 @@ def display_about_study():
         st.markdown("<style>div.stButton>button:first-child {height: 2em; width: 4em; font-size:30px}</style>",
 
                     unsafe_allow_html=True)
-
-
-def write_footer():
-    st.markdown(
-        """
-        <style>
-            .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                background-color: #f5f5f5;
-                color: #666;
-                text-align: right;
-                padding: 10px;
-                font-size: 16px;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        '<div class="footer"><a href="https://vossians.informatik.uni-bremen.de/Goodbye">Imprint</a> | <a href="https://www.uni-bremen.de/en/data-privacy">Privacy Policy</a></div>',
-        unsafe_allow_html=True
-    )
 
 
 def main():
