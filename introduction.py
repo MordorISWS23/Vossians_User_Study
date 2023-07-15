@@ -7,6 +7,8 @@ from formatting import format_sidebar_intro
 
 
 def sample(data):
+    nickname = st.session_state["nickname"]
+
     # read csv and start random process
     df_samples = pd.read_csv(data)
     # randomly select combination of one A and one model for every unique value of model and A -> 42 sentences
@@ -19,7 +21,7 @@ def sample(data):
     reduced_other_df['Model'] = np.random.permutation(reduced_other_df['Model'].values)
     reduced_other_df = reduced_other_df.sort_values(by=['A'])
     reduced_other_df.reset_index(drop=True)
-    reduced_other_df.to_csv("data/current_samples_ents.csv")
+    reduced_other_df.to_csv(f"data/{nickname}_ents.csv")
     sentences = []
     alive_dead = {"Angela Merkel": "is",
                   "Nelson Mandela": "was",
@@ -36,8 +38,9 @@ def sample(data):
         model = str(row['Model'])
         sentences.append((str(sent), model))
     df = pd.DataFrame(sentences, columns=["Sentence", "Model"])
-    df.to_csv("data/current_sample.csv")
-
+    
+    nickname = st.session_state["nickname"]
+    df.to_csv(f"data/{nickname}_samples.csv")
 
 def get_nickname():
     if "nickname" not in st.session_state:

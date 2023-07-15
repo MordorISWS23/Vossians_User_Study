@@ -64,6 +64,8 @@ class KnowledgeInquirer:
 
 
 # Create an instance of the KnowledgeInquirer class
-inquirer = KnowledgeInquirer("data/knowledge_ents.csv", "data/current_samples_ents.csv")
+nickname = st.session_state["nickname"]
+nickname = st.session_state["nickname"]
+inquirer = KnowledgeInquirer(f"data/{nickname}_knows_ents.csv", f"data/{nickname}_ents.csv")
 # Call the main function
 inquirer.main()

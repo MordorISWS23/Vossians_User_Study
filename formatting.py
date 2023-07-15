@@ -2,17 +2,13 @@ import pandas as pd
 import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
 from os.path import exists
+from glob import glob
 
 
 def display_num_participants():
     # manually write content into sidebar
-    if exists("data/knowledge_ents.csv"):
-        participants = pd.read_csv("data/knowledge_ents.csv")
-        num_users = len(participants)
-    else:
-        num_users = 0
-    return num_users
-
+    ratings_files = glob("data/*original.csv")
+    return len(ratings_files)
 
 def format_sidebar_intro():
     no_sidebar_style = """

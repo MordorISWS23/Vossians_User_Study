@@ -30,7 +30,9 @@ class VossianAntonomasiasRater:
         self.handle_ratings()
 
     def handle_ratings(self):
-        df_current = pd.read_csv("data/current_sample.csv")
+        nickname = st.session_state["nickname"]
+
+        df_current = pd.read_csv(f"data/{nickname}_samples.csv")
         key_fit = 0
         key_original = 0
         key_understand = 0
@@ -93,7 +95,11 @@ class VossianAntonomasiasRater:
 
 
 # Create an instance of the VossianAntonomasiasRater class
-rater = VossianAntonomasiasRater(samples="data/gen_sents.csv", ratings_fit="data/ratings_fit.csv", ratings_original="data/ratings_original.csv",
-                                 ratings_understand="data/ratings_understand.csv")
+nickname = st.session_state["nickname"]
+rater = VossianAntonomasiasRater(
+    samples="data/gen_sents.csv", 
+    ratings_fit=f"data/{nickname}_ratings_fit.csv", 
+    ratings_original=f"data/{nickname}_ratings_original.csv",
+    ratings_understand=f"data/{nickname}_ratings_understand.csv")
 # Call the main function
 rater.main()
