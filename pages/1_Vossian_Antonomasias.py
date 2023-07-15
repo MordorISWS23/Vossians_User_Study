@@ -20,6 +20,7 @@ class VossianAntonomasiasRater:
     def main(self):
         format_sidebar_radio_va()
         if "data_VA_original" not in st.session_state:
+            st.session_state["final_sents"] = []
             st.session_state["data_VA_original"] = {}
             st.session_state["data_VA_fit"] = {}
             st.session_state["data_VA_understand"] = {}
@@ -32,17 +33,21 @@ class VossianAntonomasiasRater:
         alive_dead = {"Angela Merkel": "is",
                       "Nelson Mandela": "was",
                       "Bill Gates": "is",
-                      "Alber Einstein": "was",
+                      "Albert Einstein": "was",
                       "Mark Twain": "was",
                       "Ronald Reagan": "was"
                       }
         # generate sentences from entities and domain
+        self.sentences = []
         for i, row in self.final_sample.iterrows():
             A = str(row['A'])
             B = str(row['B'])
             C = str(row['C'])
             sent = f"{A} {alive_dead[A]} the {B} of {C}"
-            self.sentences.append(sent)
+            model = str(row['Model'])
+            self.sentences.append((str(sent), model))
+        df = pd.DataFrame(self.sentences, columns=["Sentence", "Model"])
+        df.to_csv("data/current_sample.csv")
         self.handle_ratings()
 
     def sample(self):
@@ -61,13 +66,14 @@ class VossianAntonomasiasRater:
         self.final_sample = reduced_other_df
 
     def handle_ratings(self):
+        df_current = pd.read_csv("data/current_sample.csv")
         key_fit = 0
         key_original = 0
         key_understand = 0
-        for sent in self.sentences:
-            key_fit += 1
-            key_original += 1
-            key_understand += 1
+        for index, sent in enumerate(df_current["Sentence"]):
+            key_fit = f"{index}_{key_fit}"
+            key_original = f"{index}_{key_original}"
+            key_understand = f"{index}_{key_understand}"
             add_vertical_space(2)
             st.markdown(f"**{sent}**")
             rating_fit = st.radio(label="How well does this description fit?", options=(0, 1, 2, 3, 4, 5),
