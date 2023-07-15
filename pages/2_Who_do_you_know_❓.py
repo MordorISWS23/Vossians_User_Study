@@ -25,8 +25,8 @@ class KnowledgeInquirer:
         self.inquire_knowledge_ents(self.entities)
 
     def get_entities(self, data):
-        sources = list(data.source)
-        targets = list(data.target)
+        sources = list(data.A)
+        targets = list(data.B)
         self.entities = list(set(sources + targets))
 
     def inquire_knowledge_ents(self, ents):
@@ -64,6 +64,6 @@ class KnowledgeInquirer:
 
 
 # Create an instance of the KnowledgeInquirer class
-inquirer = KnowledgeInquirer("data/knowledge_ents.csv", "data/samples.csv")
+inquirer = KnowledgeInquirer("data/knowledge_ents.csv", "data/current_samples_ents.csv")
 # Call the main function
 inquirer.main()
