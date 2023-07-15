@@ -73,7 +73,7 @@ def display_about_study():
         how = "<p style='font-size: 25px;'>How the study works:</p>"
         st.markdown(how, unsafe_allow_html=True)
 
-        st.markdown("<p style='font-size: 20px;'>1. You will be a given X sentences to rate that "
+        st.markdown("<p style='font-size: 20px;'>1. You will be a given 21 sentences to rate that "
                     "were generated with different methods. We want to find out,"
                     " which method generates the best Vossian Antonomasias.</p>",
                     unsafe_allow_html=True)
