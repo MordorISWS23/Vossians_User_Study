@@ -4,7 +4,7 @@ import numpy as np
 import os
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.add_vertical_space import add_vertical_space
-from formatting import format_sidebar_radio_va
+from formatting import format_sidebar_radio_va, write_footer
 
 
 class VossianAntonomasiasRater:
@@ -19,6 +19,7 @@ class VossianAntonomasiasRater:
 
     def main(self):
         format_sidebar_radio_va()
+        write_footer()
         if "data_VA_original" not in st.session_state:
             st.session_state["final_sents"] = []
             st.session_state["data_VA_original"] = {}
