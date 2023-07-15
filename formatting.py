@@ -1,9 +1,31 @@
-import pandas as pd
 import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
-from os.path import exists
 from glob import glob
 
+
+def write_footer():
+    st.markdown(
+        """
+        <style>
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #f5f5f5;
+                color: #666;
+                text-align: right;
+                padding: 10px;
+                font-size: 16px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<div class="footer"><a href="https://vossians.informatik.uni-bremen.de/Goodbye">Imprint</a> | <a href="https://www.uni-bremen.de/en/data-privacy">Privacy Policy</a></div>',
+        unsafe_allow_html=True
+    )
 
 def display_num_participants():
     # manually write content into sidebar
