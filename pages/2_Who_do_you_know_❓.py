@@ -4,7 +4,7 @@ import streamlit as st
 import pandas as pd
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.add_vertical_space import add_vertical_space
-from formatting import format_sidebar_radio_know
+from formatting import format_sidebar_radio_know, write_footer
 
 
 class KnowledgeInquirer:
@@ -17,6 +17,7 @@ class KnowledgeInquirer:
     def main(self):
         st.title("How well do you know these personalities?")
         format_sidebar_radio_know()
+        write_footer()
         if "data_know" not in st.session_state:
             st.session_state.data_know = {}
         df_samples = pd.read_csv(self.sample)
