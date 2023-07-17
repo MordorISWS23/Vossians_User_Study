@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -165,7 +166,9 @@ def main():
             st.info("Please enter a nickname before continuing.")
         else:
             # create current sample
-            sample("data/gen_sents.csv")
+            nickname = st.session_state["nickname"]
+            if not os.path.exists(f"data/{nickname}_samples.csv"):
+                sample("data/gen_sents.csv")
             # switch to page for ratings
             switch_page("vossian_antonomasias")
 
