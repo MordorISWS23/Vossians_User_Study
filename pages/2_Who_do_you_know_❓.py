@@ -65,8 +65,14 @@ class KnowledgeInquirer:
 
 
 # Create an instance of the KnowledgeInquirer class
-nickname = st.session_state["nickname"]
-nickname = st.session_state["nickname"]
+from streamlit_cookies_manager import CookieManager
+cookies = CookieManager(prefix="vossian/")
+if not cookies.ready():
+    st.stop()
+
+nickname = st.session_state["nickname"] if "nickname" in st.session_state else cookies["nickname"]
+st.session_state["nickname"] = nickname
+
 inquirer = KnowledgeInquirer(f"data/{nickname}_knows_ents.csv", f"data/{nickname}_ents.csv")
 # Call the main function
 inquirer.main()

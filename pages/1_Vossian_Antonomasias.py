@@ -96,7 +96,14 @@ class VossianAntonomasiasRater:
 
 
 # Create an instance of the VossianAntonomasiasRater class
-nickname = st.session_state["nickname"]
+from streamlit_cookies_manager import CookieManager
+cookies = CookieManager(prefix="vossian/")
+if not cookies.ready():
+    st.stop()
+
+nickname = st.session_state["nickname"] if "nickname" in st.session_state else cookies["nickname"]
+st.session_state["nickname"] = nickname
+
 rater = VossianAntonomasiasRater(
     samples="data/gen_sents.csv", 
     ratings_fit=f"data/{nickname}_ratings_fit.csv", 

@@ -5,10 +5,11 @@ import pandas as pd
 from streamlit_extras.switch_page_button import switch_page
 from streamlit_extras.add_vertical_space import add_vertical_space
 from formatting import format_sidebar_intro, write_footer
+from streamlit_cookies_manager import CookieManager
+import uuid
 
 from faker import Faker
 fake = Faker()
-Faker.seed(42)
 
 def sample(data):
     nickname = st.session_state["nickname"]
@@ -126,7 +127,12 @@ def display_about_study():
                     unsafe_allow_html=True)
         add_vertical_space(1)
         
-        st.session_state["nickname"] = fake.unique.ean(length=13)
+        cookies = CookieManager(prefix="vossian/")
+        if "nickname" in cookies:
+            st.session_state["nickname"] = cookies["nickname"]
+        else:
+            cookies["nickname"] = str(uuid.uuid4())
+            st.session_state["nickname"] = cookies["nickname"]
 
         add_vertical_space(2)
         st.markdown('<p style="font-size: 20px; font-weight: bold;">About this study:</p>', unsafe_allow_html=True)
